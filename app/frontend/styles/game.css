@@ -1,0 +1,137 @@
+:root {
+  --neon-cyan: #00f2ff;
+  --neon-red: #ff003c;
+  --bg-dark: #020202;
+  --grid-line: rgba(0, 242, 255, 0.08);
+  --bot-gray: #444444;
+}
+
+.game-container {
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  height: 100vh; 
+  width: 100vw; 
+  background: var(--bg-dark); 
+  color: var(--neon-cyan); 
+  font-family: 'Courier New', monospace; 
+  overflow: hidden;
+}
+
+.game-grid {
+  position: relative; 
+  width: 850px; 
+  height: 550px; 
+  background: #050505;
+  border: 1px solid rgba(0, 242, 255, 0.15); 
+  box-sizing: border-box;
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), 
+                    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.player-node {
+  position: absolute; 
+  width: 12px; 
+  height: 12px;
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: all 0.15s linear;
+  z-index: 5;
+}
+
+/* --- ROLE STYLING --- */
+.player-node.engineer { 
+  background: var(--neon-cyan); 
+  box-shadow: 0 0 15px var(--neon-cyan); 
+}
+
+.player-node.virus { 
+  background: var(--neon-red); 
+  box-shadow: 0 0 25px var(--neon-red); 
+}
+
+.player-node.is-me { 
+  border: 2px solid #fff; 
+  z-index: 10;
+}
+
+/* --- NEW: BOT STYLING --- */
+.player-node.is-bot {
+  background: var(--bot-gray) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.5);
+  animation: bot-glitch 4s infinite ease-in-out;
+  opacity: 0.8;
+}
+
+/* If the bot becomes the virus */
+.player-node.is-bot.virus {
+  background: #600 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.6);
+  border: 1px double var(--neon-red);
+}
+
+.player-label {
+  position: absolute; 
+  top: -25px; 
+  left: 50%;
+  transform: translateX(-50%) rotate(-45deg); /* Counter-rotation Fix */
+  font-size: 9px; 
+  font-weight: 900; 
+  color: #fff; 
+  white-space: nowrap;
+  text-shadow: 0 0 8px #000; 
+  letter-spacing: 1px; 
+  pointer-events: none;
+}
+
+/* Specific Label for Bots */
+.is-bot .player-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+}
+
+.bot-tag {
+  font-size: 7px;
+  color: var(--neon-red);
+  margin-left: 4px;
+  text-shadow: 0 0 5px var(--neon-red);
+}
+
+/* --- INTERFACE STYLING --- */
+.terminal-interface {
+  width: 850px; 
+  min-height: 140px; 
+  background: rgba(0, 0, 0, 0.95);
+  border: 1px solid rgba(0, 242, 255, 0.15); 
+  margin-top: 20px; 
+  padding: 15px; 
+  box-sizing: border-box;
+}
+
+.message-feed { 
+  height: 80px; 
+  overflow-y: auto; 
+  font-size: 12px; 
+  color: rgba(0, 242, 255, 0.7); 
+}
+
+.chat-input {
+  width: 100%; 
+  background: transparent; 
+  border: none; 
+  border-top: 1px solid rgba(0, 242, 255, 0.1);
+  color: var(--neon-cyan); 
+  padding: 10px 0; 
+  outline: none; 
+  margin-top: 10px;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes bot-glitch {
+  0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) rotate(45deg) scale(0.95); }
+  98% { transform: translate(-50%, -50%) rotate(45deg); }
+  99% { transform: translate(-52%, -48%) rotate(50deg); filter: brightness(1.5); } /* Glitch jump */
+}

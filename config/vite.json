@@ -1,6 +1,7 @@
 {
   "all": {
     "sourceCodeDir": "app/frontend",
+    "extensions": [".js", ".jsx", ".ts", ".tsx", ".css", ".scss", ".sass"],
     "watchAdditionalPaths": []
   },
   "development": {

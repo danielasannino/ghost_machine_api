@@ -2,6 +2,12 @@ import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from '../App'
 
+// This MUST match the ID in your index.html.erb
 const container = document.getElementById('root')
-const root = createRoot(container)
-root.render(<App />)
+
+if (container) {
+  const root = createRoot(container)
+  root.render(<App />)
+} else {
+  console.error("React could not find the 'root' element!")
+}

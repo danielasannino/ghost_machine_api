@@ -1,18 +1,26 @@
-import React from 'react'
-import GameRoom from './components/GameRoom'
+import React, { useState } from 'react';
+import JoinForm from './components/JoinForm';
+import GameRoom from './components/GameRoom';
 
 function App() {
-  // For now, we'll hardcode the ID from your successful 'join' (Player 3)
-  // Later, we'll get this from a login/join form
-  const roomId = 1 
-  const currentPlayerId = 3 
+  const [gameData, setGameData] = useState(null); // { player: {}, room: {} }
+
+  const handleJoin = (player, room) => {
+    setGameData({ player, room });
+  };
 
   return (
     <div className="App">
-      <h1>Ghost Machine 👻</h1>
-      <GameRoom roomId={roomId} currentPlayerId={currentPlayerId} />
+      {!gameData ? (
+        <JoinForm onJoin={handleJoin} />
+      ) : (
+        <GameRoom 
+          roomId={gameData.room.code} 
+          currentPlayerId={gameData.player.id} 
+        />
+      )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

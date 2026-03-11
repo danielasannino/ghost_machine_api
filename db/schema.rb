@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_11_013632) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_11_175904) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "players", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.boolean "is_bot", default: false
     t.string "name"
     t.integer "role"
     t.bigint "room_id", null: false
