@@ -49,4 +49,4 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 end
 
-gem "vite_rails", "~> 3.0"
+gem "vite_rails", "~> 3.11"
